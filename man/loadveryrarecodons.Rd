@@ -7,9 +7,9 @@
 loadveryrarecodons()
 }
 \description{
-Loads a list of very rare codons (in E. coli K12). Doesn't include stop
+Loads a list of very rare codons (in E. coli B strain). Doesn't include stop
 codons. From
-http://www.kazusa.or.jp/codon/cgi-bin/showcodon.cgi?species=83333.
+https://www.kazusa.or.jp/codon/cgi-bin/showcodon.cgi?species=413997.
 }
 \examples{
 very_rare_codons <- loadveryrarecodons()
