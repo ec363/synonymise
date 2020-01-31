@@ -1,0 +1,18 @@
+Package: synonymise
+Title: Generate synonymous CDS of frequently used protein motifs, keep DNA synthesis companies happy!
+Version: 0.0.0.9000
+Authors@R:
+  person(given = "Eszter",
+         family = "Csibra",
+         role = c("aut", "cre"),
+         email = "ec3630@gmail.com",
+         comment = c(ORCID = "0000-0003-4759-5921"))
+Description: Taking an input coding sequence (CDS), make synonymous replacements of the codons in the CDS at a selected frequency and excluding certain sets of codons. See README for more details.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    magrittr
+Imports: 
+    dplyr
+RoxygenNote: 6.1.1
