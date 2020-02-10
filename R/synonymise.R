@@ -67,7 +67,7 @@ synonymise <- function(cds, codon_table = codon_table, forbidden_codons = c(very
                                                    returndf = TRUE,
                                                    verbose = TRUE)
       print(synonymous_codons)
-      selectedcodon <- select_alternative(possible_codons = synonymous_codons, forbidden_codons = c(very_rare_codons, rare_codons),
+      selectedcodon <- select_alternative(possible_codons = synonymous_codons, forbidden_codons = forbidden_codons,
                                            verbose=TRUE, input=currentcodon)
       print(selectedcodon)
 
