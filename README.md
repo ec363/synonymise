@@ -26,7 +26,20 @@ The frequency parameter allows you to specify how often to edit a codon: every c
 
 The displacement parameter allows you to start editing on a codon other than the one provided by the frequency value alone, that is, when frequency = 3 and displacement = 0, the first edited codon will be the third codon. To start at codon 1 instead, then codon 4, etc, use frequency = 3, displacement = 1, which gets the index of the first codon to 0 (so index%%frequency will be 0).
 
----
+**Note**
+
+Please note that this is a tool developed for personal use, and is subject to continued improvements. However, I'd be happy if it was useful to others, and I'd welcome feedback/suggestions for its improvement.
+
+## Installation and Example Usage
+
+**Installing the package**
+
+The package is written in R and can be installed straight from GitHub:
+
+```r
+# install.packages("devtools") # if it's not already installed
+devtools::install_github("ec363/synonymise")
+```
 
 **Example script**
 
