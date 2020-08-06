@@ -22,11 +22,9 @@
 find_synonymous_codons <- function(selectedcodon = NULL, codon_table = codon_table,
                                    returndf = TRUE, verbose = TRUE){
 
-  if(verbose == TRUE){
-    cat(paste0("\nSelected codon: ", selectedcodon, ".\n"))
-  }
+  if(verbose == TRUE){cat(paste0("\nSelected codon: ", selectedcodon, ".\n"))}
   if(is.null(selectedcodon)){
-    cat("Error, please select a codon. \n")
+    if(verbose == TRUE){cat("Error, please select a codon. \n")}
     return()
   }
 
@@ -36,12 +34,10 @@ find_synonymous_codons <- function(selectedcodon = NULL, codon_table = codon_tab
     unlist() %>% # dataframe -> factor
     as.character() -> encodedAA # factor -> character
   encodedAA
-  if(verbose == TRUE){
-    cat(paste0("Encoded amino acid is: ", encodedAA, ". \n"))
-  }
+  if(verbose == TRUE){cat(paste0("Encoded amino acid is: ", encodedAA, ". \n"))}
 
   if(encodedAA == "STOP"){
-    cat(paste0("Error, input codon is a stop codon. \nReturning original stop codon: ", selectedcodon, ".\n"))
+    if(verbose == TRUE){cat(paste0("Error, input codon is a stop codon. \nReturning original stop codon: ", selectedcodon, ".\n"))}
     # Export codon as df to allow select_alternatives to work:
     codon_table %>%
       dplyr::filter(codons == selectedcodon) %>%
@@ -49,7 +45,7 @@ find_synonymous_codons <- function(selectedcodon = NULL, codon_table = codon_tab
     return(synonyms)
   }
   if(encodedAA == "Met" | encodedAA == "Trp"){
-    cat(paste0("Error, amino acid has no alternative codons (Met/Trp). \nReturning original codon: ", selectedcodon, ".\n"))
+    if(verbose == TRUE){cat(paste0("Error, amino acid has no alternative codons (Met/Trp). \nReturning original codon: ", selectedcodon, ".\n"))}
     # Export codon as df to allow select_alternatives to work:
     codon_table %>%
       dplyr::filter(codons == selectedcodon) %>%
@@ -63,7 +59,7 @@ find_synonymous_codons <- function(selectedcodon = NULL, codon_table = codon_tab
   synonyms
   if(returndf == TRUE){
     if(verbose == TRUE){
-      cat(paste0("Alternative codons for ", encodedAA, " (", selectedcodon, "): \n"))
+      if(verbose == TRUE){cat(paste0("Alternative codons for ", encodedAA, " (", selectedcodon, "): \n"))}
     }
 
     return(synonyms)
@@ -74,7 +70,7 @@ find_synonymous_codons <- function(selectedcodon = NULL, codon_table = codon_tab
       synonymlist <- c(synonymlist, as.character(unlist(synonyms[i,]))) # rbind gives matrix, c gives list
     }
     if(verbose == TRUE){
-      cat(paste0("Alternative codons for ", encodedAA, " (", selectedcodon, "): \n"))
+      if(verbose == TRUE){cat(paste0("Alternative codons for ", encodedAA, " (", selectedcodon, "): \n"))}
     }
     return(synonymlist)
   }

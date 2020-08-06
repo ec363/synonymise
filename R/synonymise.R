@@ -27,15 +27,16 @@
 #' @param forbidden_codons dataframe of codons to exclude, such as rare codons. Defaults to very_rare_codons + rare_codons.
 #' @param frequency integer. How often to make a replacement? Defaults to 1, meaning every codon is replaced.
 #' @param displacement integer. Which codon to be the first to be replaced? Defaults to 0, meaning the first codon.
-#' @param verbose logical. Defaults to FALSE.
+#' @param verbose_synonymise logical. Defaults to TRUE.
 #' @export
 #' @examples
 #' myCDS <- synonymise(cds = "gggaaaccctag", codon_table = codon_table, forbidden_codons = c(very_rare_codons, rare_codons), frequency = 2, displacement = 1)
 
 # library(magrittr)
 
-synonymise <- function(cds, codon_table = codon_table, forbidden_codons = c(very_rare_codons, rare_codons), frequency = 1, displacement = 0, verbose = TRUE){
-
+synonymise <- function(cds, codon_table = codon_table, forbidden_codons = c(very_rare_codons, rare_codons), 
+                       frequency = 1, displacement = 0, verbose_synonymise = TRUE){
+  
   # break into codons
   triplets <- regmatches(cds, gregexpr(".{3}", cds))[[1]]
   triplets
@@ -52,31 +53,29 @@ synonymise <- function(cds, codon_table = codon_table, forbidden_codons = c(very
   # ( calculate index, then use if index %%(frequency)=0 (when divided by (frequency) it gives 0 remainder) )
   for(currentcodon in TRIPLETS){
 
-    if(verbose==TRUE){cat(paste0("\nfor codon: ", currentcodon, "\n"))}
-
     # Find index: which nth element is this?
     index <- which(TRIPLETS == currentcodon)[[1]] - displacement
 
     if (index%%frequency == 0) {
 
       # edit codons:
-      if(verbose==TRUE){cat(paste0("editing codon..\n"))}
-
       synonymous_codons <- find_synonymous_codons(selectedcodon = currentcodon,
                                                    codon_table = codon_table,
                                                    returndf = TRUE,
-                                                   verbose = TRUE)
-      print(synonymous_codons)
-      selectedcodon <- select_alternative(possible_codons = synonymous_codons, forbidden_codons = forbidden_codons,
-                                           verbose=TRUE, input=currentcodon)
-      print(selectedcodon)
+                                                   verbose = verbose_synonymise)
+      if(verbose_synonymise==TRUE){ print(synonymous_codons) }
+      selectedcodon <- select_alternative(input = currentcodon,
+                                          possible_codons = synonymous_codons, forbidden_codons = forbidden_codons,
+                                          verbose = verbose_synonymise)
+      # if(verbose_synonymise==TRUE){ print(selectedcodon) } # This is redundant under all conditions!
 
       newcds_parts <- c(newcds_parts, selectedcodon)
 
     } else {
 
       # don't edit codons
-      if(verbose==TRUE){cat(paste0("unchanged codon..\n"))}
+      if(verbose_synonymise==TRUE){cat(paste0("\nSelected codon: ", currentcodon, ".\n"))}
+      if(verbose_synonymise==TRUE){cat(paste0("Not to be altered. \n"))}
 
       unchangedcodon <- currentcodon
       newcds_parts <- c(newcds_parts, unchangedcodon)

@@ -18,16 +18,16 @@
 #' @examples
 #' select_alternative(possible_codons = synonymous_codons, forbidden_codons = c(very_rare_codons, rare_codons), verbose=TRUE, input="CGC")
 
-select_alternative <- function(possible_codons, forbidden_codons, verbose=FALSE, input=""){
+select_alternative <- function(input = "", possible_codons, forbidden_codons, verbose = FALSE){
 
   # input codon
   if(exists("input")){
-    cat(paste0("input codon: ", input, "\n"))
+    if(verbose==TRUE){cat(paste0("input codon: ", input, "\n"))}
   }
 
   # No alternatives? eg. ATG
   if(is.null(possible_codons)){
-    cat("Error: no possible codons provided.\n")
+    if(verbose==TRUE){cat("Error: no possible codons provided.\n")}
     return()
   }
   # All alternatives are rare? eg only AAA alt is rare AAG.
