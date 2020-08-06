@@ -6,7 +6,7 @@
 \usage{
 synonymise(cds, codon_table = codon_table,
   forbidden_codons = c(very_rare_codons, rare_codons), frequency = 1,
-  displacement = 0, verbose = TRUE)
+  displacement = 0, verbose_synonymise = TRUE)
 }
 \arguments{
 \item{cds}{input coding sequence as a string. Must be in frame!}
@@ -20,7 +20,7 @@ object named codon_table.}
 
 \item{displacement}{integer. Which codon to be the first to be replaced? Defaults to 0, meaning the first codon.}
 
-\item{verbose}{logical. Defaults to FALSE.}
+\item{verbose_synonymise}{logical. Defaults to TRUE.}
 }
 \description{
 Using an input coding sequence (cds), make synonymous replacements codons in

@@ -4,19 +4,19 @@
 \alias{select_alternative}
 \title{select_alternative}
 \usage{
-select_alternative(possible_codons, forbidden_codons, verbose = FALSE,
-  input = "")
+select_alternative(input = "", possible_codons, forbidden_codons,
+  verbose = FALSE)
 }
 \arguments{
+\item{input}{optional. string used to specify input codon, only required for
+verbosity. Defaults to "".}
+
 \item{possible_codons}{dataframe of codons to choose from (eg. output from
 find_synonymous_codons function).}
 
 \item{forbidden_codons}{dataframe of codons to exclude, such as rare codons.}
 
 \item{verbose}{logical. Defaults to FALSE.}
-
-\item{input}{optional. string used to specify input codon, only required for
-verbosity. Defaults to "".}
 }
 \description{
 Select a codon from a provided list that has a decent codon usage. Works by
